@@ -1,26 +1,394 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Satori Brand Colors - Original Palette Restored */
+  --ivory: #FDFBF5;
+  --copper: #B85C38;
+  --dark-brown: #2C1E1A;
+  --champagne-gold: #E0A96D;
+  --charcoal: #343434;
+
+  /* Shadcn Theme adapted for Satori */
+  --radius: 0;
+  /* Keeping sharp edges from new design */
+  --background: #FDFBF5;
+  --foreground: #2C1E1A;
+  --card: #FDFBF5;
+  --card-foreground: #2C1E1A;
+  --popover: #FDFBF5;
+  --popover-foreground: #2C1E1A;
+  --primary: #B85C38;
+  --primary-foreground: #FDFBF5;
+  --secondary: #E0A96D;
+  --secondary-foreground: #2C1E1A;
+  --muted: #F5F1E8;
+  --muted-foreground: #343434;
+  --accent: #E0A96D;
+  --accent-foreground: #2C1E1A;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #E8E0D4;
+  --input: #F5F1E8;
+  --ring: #B85C38;
+  --chart-1: #B85C38;
+  --chart-2: #E0A96D;
+  --chart-3: #2C1E1A;
+  --chart-4: #343434;
+  --chart-5: #FDFBF5;
+  --sidebar: #FDFBF5;
+  --sidebar-foreground: #2C1E1A;
+  --sidebar-primary: #B85C38;
+  --sidebar-primary-foreground: #FDFBF5;
+  --sidebar-accent: #E0A96D;
+  --sidebar-accent-foreground: #2C1E1A;
+  --sidebar-border: #E8E0D4;
+  --sidebar-ring: #B85C38;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'EB Garamond', serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary);
+  transition: color 0.3s ease;
+}
+
+.dark {
+  --background: #2C1E1A;
+  --foreground: #FDFBF5;
+  --card: #343434;
+  --card-foreground: #FDFBF5;
+  --popover: #343434;
+  --popover-foreground: #FDFBF5;
+  --primary: #FDFBF5;
+  --primary-foreground: #2C1E1A;
+  --secondary: #E0A96D;
+  --secondary-foreground: #2C1E1A;
+  --muted: #343434;
+  --muted-foreground: #FDFBF5;
+  --accent: #E0A96D;
+  --accent-foreground: #2C1E1A;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(253, 251, 245, 0.1);
+  --input: rgba(253, 251, 245, 0.15);
+  --ring: #E0A96D;
+  --chart-1: #2C1E1A;
+  --chart-2: #E0A96D;
+  --chart-3: #FDFBF5;
+  --chart-4: #FDFBF5;
+  --chart-5: #2C1E1A;
+  --sidebar: #2C1E1A;
+  --sidebar-foreground: #FDFBF5;
+  --sidebar-primary: #FDFBF5;
+  --sidebar-primary-foreground: #2C1E1A;
+  --sidebar-accent: #E0A96D;
+  --sidebar-accent-foreground: #2C1E1A;
+  --sidebar-border: rgba(253, 251, 245, 0.1);
+  --sidebar-ring: #E0A96D;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .satori-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .satori-heading {
+    font-family: 'Oswald', sans-serif;
+    color: var(--foreground);
+    line-height: 1.1;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .satori-text {
+    font-family: 'EB Garamond', serif;
+    color: var(--foreground);
+    opacity: 0.9;
+    line-height: 1.7;
+    font-size: 1.125rem;
+  }
+
+  .satori-button-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 2.5rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .satori-button-primary:hover {
+    background-color: var(--accent);
+    color: var(--primary-foreground);
+  }
+
+  .satori-button-secondary {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 2.5rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .satori-button-secondary:hover {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .satori-container {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .satori-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .satori-container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  .satori-section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .satori-section {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+
+  .satori-card {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .satori-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Brand Typography Classes */
+  .satori-display {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .satori-headline {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .satori-subhead {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+  }
+
+  .satori-body {
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--foreground);
+    opacity: 0.9;
+  }
+
+  .satori-caption {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Enhanced Layout Classes */
+  .satori-hero-enhanced {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--background);
+  }
+
+  .satori-content-width {
+    max-width: 85rem;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .satori-content-width {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  .satori-section-enhanced {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .satori-section-enhanced {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
+  }
+
+  /* Refined Button Styles */
+  .satori-button-elegant {
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    border-radius: 0;
+    transition: all 0.4s ease;
+  }
+
+  .satori-button-elegant:hover {
+    background-color: var(--primary);
+    color: var(--background);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .satori-button-filled {
+    background-color: var(--primary);
+    color: var(--background);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    border-radius: 0;
+    border: 1px solid var(--primary);
+    transition: all 0.4s ease;
+  }
+
+  .satori-button-filled:hover {
+    background-color: transparent;
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .satori-button-outline {
+    background-color: transparent;
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.5rem 0;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: all 0.4s ease;
+  }
+
+  .satori-button-outline:hover {
+    opacity: 0.7;
+    transform: translateX(5px);
+  }
+
+  /* Utility Classes */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
 }
